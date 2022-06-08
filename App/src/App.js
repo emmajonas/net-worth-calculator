@@ -6,6 +6,12 @@ import { inputs, names } from "./inputs";
 import { getNewTotals } from "./NetWorthService";
 import NetWorthTable from './NetWorthTable';
 
+// to do: make table wider so it doesnt expand on change of currency
+// add error message if server is down
+// add sub-categories
+// test cases
+// make assets and liabilities show next to each other ?
+
 function App() {
   const [selectedCurrency, setSelectedCurrency] = useState(currencies[0]);
   const [previousCurrency, setPreviousCurrency] = useState(currencies[0]);

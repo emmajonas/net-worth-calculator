@@ -4,9 +4,7 @@
 
 - unit tests on backend
 
-- frontend framework
-
-- frontend style
+- frontend finalized style
 
 - unit tests on frontend
 
