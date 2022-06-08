@@ -7,7 +7,7 @@ const port = 4000;
 app.use(express.json())
 
 // If the currency code changes, calculate the exchange rate and send the results
-function getCurrencyAndSend(res, prevCurrency, currency, assets, liabilities) {
+function getRateAndSend(res, prevCurrency, currency, assets, liabilities) {
     const requestURL = "https://api.exchangerate.host/convert?from=" + prevCurrency + "&to=" + currency;
 
     let rate = 1
@@ -74,21 +74,18 @@ function calculateAndSend(res, assets, liabilities, rate) {
 
 async function run() {
   try {
-    // Store the previous currency
-    let prevCurrency = "CAD";
-
-    app.get('/', (req, res) => {
+    app.post('/', (req, res) => {
         const currency = req.body.currency.toUpperCase();
+        const prevCurrency = req.body.previous_currency.toUpperCase();
         const assets = req.body.assets;
         const liabilities = req.body.liabilities;
 
         // If the currency changed, get exchange rate
         if (prevCurrency != currency) {
-            prevCurrency = getCurrencyAndSend(res, prevCurrency, currency, assets, liabilities);
+            getRateAndSend(res, prevCurrency, currency, assets, liabilities);
         } else {
             calculateAndSend(res, assets, liabilities, 1);
         }
-        prevCurrency = currency
       });
     } catch {
         error => console.error(error);
