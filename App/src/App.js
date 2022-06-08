@@ -7,61 +7,79 @@ import { getNewTotals } from "./NetWorthService";
 import NetWorthTable from './NetWorthTable';
 
 // to do
-// add error message if server is down
 // test cases
 
 function App() {
-  const [selectedCurrency, setSelectedCurrency] = useState(currencies[0]);
-  const [previousCurrency, setPreviousCurrency] = useState(currencies[0]);
-  const [inputState, setInputState] = useState(inputs);
-  const [showError, setShowError] = useState(false);
+  const [state, setState] = useState({ 
+    selectedCurrency: currencies[0],
+    previousCurrency: currencies[0],
+    inputs: inputs,
+    showError: false
+  });
   const [timer, setTimer] = useState(null);
 
+  // When a user changes a value in the table
   const handleInputChange = (event) => {
     const value = event.target.value;
     const key = event.target.id;
-    const name = event.target.name
-    // add error messaging on screen
-    setShowError(false)
-    setInputState({ ...inputState, [name]: {...inputState[name], [key]: value}});
+    const name = event.target.name;
 
-    let assets = inputState["assets"];
-    let liabilities = inputState["liabilities"];
-    if (name === "assets") {
-      assets = { ...assets, [key]: value }
-    } else {
-      liabilities = { ...liabilities, [key]: value }
-    }
+    setState({
+      ...state,
+      inputs: { ...state.inputs, [name]: {...state.inputs[name], [key]: value }},
+      showError: false
+    });
 
-    // ensure totals update only after the user finishes typing
-    clearTimeout(timer)
+    // Ensure the most up-to-date values are passed to the backend
+    let assets = state.inputs["assets"];
+    let liabilities = state.inputs["liabilities"];
+    if (name === "assets") assets = { ...assets, [key]: value };
+    else liabilities = { ...liabilities, [key]: value };
+
+    // Ensure totals update only after the user finishes typing
+    clearTimeout(timer);
 
     const newTimer = setTimeout(() => {
-      const currency = selectedCurrency
-      getNewTotals({ currency: currency.code, previous_currency: previousCurrency.code, assets, liabilities })
-        .then(response => {
-          if (response !== [] && response !== undefined && response != null && !(response instanceof Error)) {
-            setInputState(response)
-            setPreviousCurrency(currency)
+      const currency = state.selectedCurrency;
+      getNewTotals({
+        currency: currency.code,
+        previous_currency: state.previousCurrency.code,
+        assets,
+        liabilities
+      }).then(response => {
+          if (response !== [] && response !== undefined
+            && response != null && !(response instanceof Error)) {
+            setState({ ...state, inputs: response, previousCurrency: currency });
           } else {
-            setShowError(true)
+            // Display error message if the request fails
+            setState({ ...state, showError: true});
           }
       });
-    }, 500);
+    }, 750);
 
-    setTimer(newTimer)
+    setTimer(newTimer);
   };
 
+  // When a user changes the currency
   const handleCurrencyChange = (currency) => {
-    setShowError(false)
-    getNewTotals({currency: currency.code, previous_currency: selectedCurrency.code, assets: inputState["assets"], liabilities: inputState["liabilities"]})
-      .then(response => {
-        if (response !== [] && response !== undefined && response !== null && !(response instanceof Error)) {
-          setInputState(response)
-          setPreviousCurrency(currency)
-          setSelectedCurrency(currency)
+    setState({ ...state, showError: false });
+    getNewTotals({
+      currency: currency.code,
+      previous_currency: state.selectedCurrency.code,
+      assets: state.inputs["assets"],
+      liabilities: state.inputs["liabilities"]
+    }).then(response => {
+        if (response !== [] && response !== undefined
+          && response !== null && !(response instanceof Error)) {
+          setState({
+            ...state,
+            selectedCurrency: currency,
+            previousCurrency: currency,
+            inputs: response
+          });
         } else {
-          setShowError(true)
+          // Display error message if the request fails
+          setState({ ...state, showError: true });
         }
     });
   };
@@ -77,14 +95,19 @@ function App() {
         <div className="select-currency">
           <p className="currency-label">Select currency:</p>
           <SelectCurrency 
-            selectedCurrency={selectedCurrency}
+            selectedCurrency={state.selectedCurrency}
             handleCurrencyChange={handleCurrencyChange}
             currencies={currencies} />
+          {state.showError && (
+            <div className="error-message">
+              <h5>An error occured while fetching data</h5>
+            </div>
+          )}
         </div>
         <NetWorthTable
           names={names}
-          selectedCurrency={selectedCurrency}
-          inputState={inputState}
+          selectedCurrency={state.selectedCurrency}
+          inputs={state.inputs}
           handleInputChange={handleInputChange}
         />
       </div>

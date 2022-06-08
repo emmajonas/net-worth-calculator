@@ -1,20 +1,13 @@
 import React, { useState } from 'react';
 import "./SelectCurrency.css";
 
-const SelectCurrency = ({ selectedCurrency, handleCurrencyChange, currencies}) => {
+const SelectCurrency = ({ selectedCurrency, handleCurrencyChange, currencies }) => {
     const [open, setOpen] = useState(false);
 
-    const isItemInSelection = (item) => {
-        if (selectedCurrency.code === item.code) {
-            return true;
-        }
-        return false;
-    }
-
     const handleChange = (currency) => {
-        handleCurrencyChange(currency)
+        handleCurrencyChange(currency);
         setOpen(false);
-    }
+    };
 
     return (
         <div className="dropdown">
@@ -34,14 +27,14 @@ const SelectCurrency = ({ selectedCurrency, handleCurrencyChange, currencies}) =
                         <li className="d-list-item" key={currency.code}>
                             <button type="button" onClick={() => handleChange(currency)}>
                                 <span>{currency.code}</span>
-                                <span>{isItemInSelection(currency) && " \u2713"}</span>
+                                <span>{selectedCurrency.code === currency.code && " \u2713"}</span>
                             </button>
                         </li>
                     ))}
                 </ul>
             )}
         </div>
-    )
+    );
 }
 
 export default SelectCurrency;

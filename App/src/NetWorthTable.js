@@ -1,14 +1,15 @@
 import React from "react";
 import "./NetWorthTable.css";
 
-const NetWorthTable = ({ names, selectedCurrency, inputState, handleInputChange }) => {
+const NetWorthTable = ({ names, selectedCurrency, inputs, handleInputChange }) => {
     const tableData = (input, name) => Object.keys(input).map(key => {
-        let value = ""; let title = "";
+        let value = "";
         if (key === "credit_card_1" || key === "credit_card_2" || key === "mortgage_1"
             || key === "mortgage_2" || key === "line_of_credit" || key === "investment_loan") {
-            value = selectedCurrency.symbol + "0.00"
+            value = selectedCurrency.symbol + "0.00";
         }
 
+        let title = "";
         if (key === "chequing") title = "Cash and Investments";
         else if (key === "primary_home") title = "Long Term Assets";
         else if (key === "credit_card_1") title = "Short Term Liabilities";
@@ -53,23 +54,23 @@ const NetWorthTable = ({ names, selectedCurrency, inputState, handleInputChange 
             <tbody>
               <tr>
                 <td colSpan="2"><h3><code>Net Worth</code></h3></td>
-                <td className="green">{selectedCurrency.symbol} {inputState.net_worth}</td>
+                <td className="green">{selectedCurrency.symbol} {inputs.net_worth}</td>
               </tr>
               <tr>
                 <td colSpan="3"><h4><code>Assets</code></h4></td>
               </tr>
-              {tableData(inputState.assets, "assets")}
+              {tableData(inputs.assets, "assets")}
               <tr>
                 <td colSpan="2"><h4><code>Total Assets:</code></h4></td>
-                <td className="green">{selectedCurrency.symbol} {inputState.total_assets}</td>
+                <td className="green">{selectedCurrency.symbol} {inputs.total_assets}</td>
               </tr>
               <tr>
                 <td colSpan="3"><h4><code>Liabilities</code></h4></td>
               </tr>
-              {tableData(inputState.liabilities, "liabilities")}
+              {tableData(inputs.liabilities, "liabilities")}
               <tr>
                 <td colSpan="2"><h4><code>Total Liabilities:</code></h4></td>
-                <td className="green">{selectedCurrency.symbol} {inputState.total_liabilities}</td>
+                <td className="green">{selectedCurrency.symbol} {inputs.total_liabilities}</td>
               </tr>
             </tbody>
           </table>

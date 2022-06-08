@@ -25,3 +25,8 @@
 .currency-label {
     padding-top: 5px;
 }
+
+.error-message {
+    color: red;
+    padding: 3px 0px 0px 10px;
+}
