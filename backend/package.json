@@ -1,0 +1,16 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "backend for net worth calculator",
+  "main": "server.js",
+  "scripts": {
+    "test": "jest --detectOpenHandles",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.1",
+    "supertest": "^6.2.3"
+  }
+}

@@ -1,10 +1,13 @@
-const express = require('express')
-const https = require('https')
+'use strict';
+
+const express = require('express');
+const https = require('https');
 
 // Create a new instance of express
-const app = express()
+const app = express();
 const port = 4000;
-app.use(express.json())
+module.exports = app;
+app.use(express.json());
 
 // If the currency code changes, calculate the exchange rate and send the results
 function getRateAndSend(res, prevCurrency, currency, assets, liabilities) {
