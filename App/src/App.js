@@ -97,7 +97,8 @@ function App() {
           <SelectCurrency 
             selectedCurrency={state.selectedCurrency}
             handleCurrencyChange={handleCurrencyChange}
-            currencies={currencies} />
+            currencies={currencies}
+          />
           {state.showError && (
             <div className="error-message">
               <h5>An error occured while fetching data</h5>
