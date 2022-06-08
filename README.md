@@ -18,7 +18,7 @@
 
 - run `npm start`
 
-- open up a new terminal window or tab and run `cd ../backend && npm install`
+- open up a new terminal tab and run `cd ../backend && npm install`
 
 - run `node server.js`
 
