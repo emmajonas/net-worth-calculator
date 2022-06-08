@@ -1,0 +1,42 @@
+.dropdown {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 10px;
+    background-color: #282c34;
+}
+  
+.dropdown :hover {
+    cursor: pointer;
+}
+
+.d-header {
+    width: 5em;
+    margin: 0px;
+}
+
+.d-header_title--bold {
+    border: 1px solid white;
+    padding: 5px;
+    margin-bottom: 0px;
+}
+
+.d-list {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    width: 5em;
+    margin: 0px;
+    padding: 0px;
+}
+
+.d-list-item {
+    flex: 1;
+    border: 1px solid white;
+}
+
+.d-list-item button {
+    background: transparent;
+    border: none;
+    color: white;
+}
