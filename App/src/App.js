@@ -6,10 +6,7 @@ import { inputs, names } from "./inputs";
 import { getNewTotals } from "./NetWorthService";
 import NetWorthTable from './NetWorthTable';
 
-// to do
-// test cases
-
-function App() {
+const App = () => {
   const [state, setState] = useState({ 
     selectedCurrency: currencies[0],
     previousCurrency: currencies[0],
@@ -85,14 +82,14 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <header className="App-header">
+    <div className="App" data-testid="App">
+      <header className="App-header" data-testid="App-header">
         <h1>
           <code>Net Worth Calculator</code>
         </h1>
       </header>
-      <div className="container">
-        <div className="select-currency">
+      <div className="container" data-testid="container">
+        <div className="select-currency" data-testid="select-currency">
           <p className="currency-label">Select currency:</p>
           <SelectCurrency 
             selectedCurrency={state.selectedCurrency}
