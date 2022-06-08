@@ -6,11 +6,9 @@ import { inputs, names } from "./inputs";
 import { getNewTotals } from "./NetWorthService";
 import NetWorthTable from './NetWorthTable';
 
-// to do: make table wider so it doesnt expand on change of currency
+// to do
 // add error message if server is down
-// add sub-categories
 // test cases
-// make assets and liabilities show next to each other ?
 
 function App() {
   const [selectedCurrency, setSelectedCurrency] = useState(currencies[0]);
@@ -35,6 +33,7 @@ function App() {
       liabilities = { ...liabilities, [key]: value }
     }
 
+    // ensure totals update only after the user finishes typing
     clearTimeout(timer)
 
     const newTimer = setTimeout(() => {
@@ -76,7 +75,7 @@ function App() {
       </header>
       <div className="container">
         <div className="select-currency">
-          <p>Select currency:</p>
+          <p className="currency-label">Select currency:</p>
           <SelectCurrency 
             selectedCurrency={selectedCurrency}
             handleCurrencyChange={handleCurrencyChange}

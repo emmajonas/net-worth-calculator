@@ -21,3 +21,7 @@
     margin-right: auto;
     width: 100%;
 }
+
+.currency-label {
+    padding-top: 5px;
+}
