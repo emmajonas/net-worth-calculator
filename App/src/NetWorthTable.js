@@ -18,19 +18,19 @@ const NetWorthTable = ({ names, selectedCurrency, inputs, handleInputChange }) =
         return (
           <>
             {(key === "chequing" || key === "primary_home") && (
-              <tr>
+              <tr className="asset-rows">
                 <td colSpan="2"><h5><code>{title}</code></h5></td>
                 <td></td>
               </tr>
             )}
             {(key === "credit_card_1" || key === "mortgage_1") && (
-              <tr>
+              <tr className="liability-rows">
                 <td><h5><code>{title}</code></h5></td>
                 <td><h5><code>Monthly Payment</code></h5></td>
                 <td></td>
               </tr>
             )}
-            <tr>
+            <tr className="input-data-row">
               <td><p>{names[name][key]}</p></td>
               <td>{value}</td>
               <td>{selectedCurrency.symbol} &nbsp;
@@ -49,8 +49,8 @@ const NetWorthTable = ({ names, selectedCurrency, inputs, handleInputChange }) =
       });
 
     return (
-        <div className="net-worth">
-          <table className="net-worth-table">
+        <div className="net-worth" data-testid="net-worth">
+          <table className="net-worth-table" data-testid="net-worth-table">
             <tbody>
               <tr>
                 <td colSpan="2"><h3><code>Net Worth</code></h3></td>
