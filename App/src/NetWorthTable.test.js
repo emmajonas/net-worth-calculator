@@ -1,17 +1,16 @@
 import React from "react";
-import { render, fireEvent, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { inputs, names } from "./inputs";
 import NetWorthTable from "./NetWorthTable";
 import { currencies } from "./currencies";
 
-describe("NetWorthTable", (currency = currencies[0]) => {
-    const handleInputChange = jest.fn()
-    const mount = () => render(
+describe("NetWorthTable", () => {
+    const mount = (currency = currencies[0]) => render(
         <NetWorthTable 
             names={names}
             selectedCurrency={currency}
             inputs={inputs}
-            handleInputChange={handleInputChange}
+            handleInputChange={() => {}}
         />
     );
 
@@ -30,7 +29,7 @@ describe("NetWorthTable", (currency = currencies[0]) => {
     });
 
     it("displays the correct currency symbol", async () => {
-        const { container } = mount(currency = currencies[2]);
+        const { container } = mount(currencies[2]);
 
         expect(container.getElementsByClassName("green")[0]).toHaveTextContent(currencies[2].symbol);
         expect(container.getElementsByClassName("input-data-row")[0]).toHaveTextContent(currencies[2].symbol);
