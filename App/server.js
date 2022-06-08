@@ -10,7 +10,7 @@ app.use(express.json())
 function getRateAndSend(res, prevCurrency, currency, assets, liabilities) {
     const requestURL = "https://api.exchangerate.host/convert?from=" + prevCurrency + "&to=" + currency;
 
-    let rate = 1
+    let rate = 1;
     https.get(requestURL, response => {
         var body = "";
         response.on("data", chunk => {
@@ -37,9 +37,9 @@ function calculateAndSend(res, assets, liabilities, rate) {
 
     for (let item in assets) {
         if (isNaN(assets[item])) {
-            error = "Value at " + item + " is not a number"
+            error = "Value at " + item + " is not a number";
             res.status(400).send(error);
-            console.log(error)
+            console.log(error);
             return;
         }
         total_assets += assets[item] * rate;
@@ -48,9 +48,9 @@ function calculateAndSend(res, assets, liabilities, rate) {
 
     for (let item in liabilities) {
         if (isNaN(liabilities[item])) {
-            error = "Value at " + item + " is not a number"
+            error = "Value at " + item + " is not a number";
             res.status(400).send(error);
-            console.log(error)
+            console.log(error);
             return;
         }
         total_liabilities += liabilities[item] * rate;
