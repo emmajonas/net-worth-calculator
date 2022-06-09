@@ -1,15 +1,5 @@
 # Net Worth Calculator
 
-## To Do
-
-- unit tests on backend
-
-- design diagram
-
-- slide deck
-
-- address discussion points
-
 ## Setup Instructions
 
 - run `git clone https://github.com/emmajonas/net-worth-calculator.git`
