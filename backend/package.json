@@ -4,13 +4,17 @@
   "description": "backend for net worth calculator",
   "main": "server.js",
   "scripts": {
-    "test": "jest --detectOpenHandles",
+    "test": "jest",
     "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.1",
+    "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "jest": "^28.1.1",
+    "sinon": "^14.0.0",
     "supertest": "^6.2.3"
   }
 }
