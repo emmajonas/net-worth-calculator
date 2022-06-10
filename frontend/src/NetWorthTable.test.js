@@ -23,7 +23,8 @@ describe("NetWorthTable", () => {
         expect(container.getElementsByClassName("input-data").length).toBe(18);
         expect(container.getElementsByClassName("asset-rows").length).toBe(2);
         expect(container.getElementsByClassName("liability-rows").length).toBe(2);
-        expect(container.getElementsByClassName("green").length).toBe(3);
+        expect(container.getElementsByClassName("green").length).toBe(2);
+        expect(container.getElementsByClassName("red").length).toBe(1);
         expect(container.getElementsByClassName("green")[0]).toHaveTextContent(currencies[0].symbol);
         expect(container.getElementsByClassName("input-data-row")[0]).toHaveTextContent(currencies[0].symbol);
     });

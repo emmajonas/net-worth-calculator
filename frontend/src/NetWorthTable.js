@@ -54,7 +54,7 @@ const NetWorthTable = ({ names, selectedCurrency, inputs, handleInputChange }) =
             <tbody>
               <tr>
                 <td colSpan="2"><h3><code>Net Worth</code></h3></td>
-                <td className="green">{selectedCurrency.symbol} {inputs.net_worth}</td>
+                <td className={inputs.net_worth >= 0 ? "green": "red"}>{selectedCurrency.symbol} {inputs.net_worth}</td>
               </tr>
               <tr>
                 <td colSpan="3"><h4><code>Assets</code></h4></td>
@@ -70,7 +70,7 @@ const NetWorthTable = ({ names, selectedCurrency, inputs, handleInputChange }) =
               {tableData(inputs.liabilities, "liabilities")}
               <tr>
                 <td colSpan="2"><h4><code>Total Liabilities:</code></h4></td>
-                <td className="green">{selectedCurrency.symbol} {inputs.total_liabilities}</td>
+                <td className="red">{selectedCurrency.symbol} {inputs.total_liabilities}</td>
               </tr>
             </tbody>
           </table>
